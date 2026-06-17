@@ -8,13 +8,22 @@ type WorkCardProps = {
   onOpen: (work: Work) => void;
   priority?: boolean;
 };
+const getAssetPath = (path: string) => {
+  if (path.startsWith("http")) return path;
 
+  const base =
+    process.env.NODE_ENV === "production"
+      ? `/${repo}`
+      : "";
+
+  return `${base}${path}`;
+};
 export function WorkCard({ work, onOpen, priority = false }: WorkCardProps) {
   return (
     <button type="button" className="work-card__button" onClick={() => onOpen(work)}>
       <div className="work-card__media">
         <Image
-          src={work.image}
+          src={getAssetPath(work.image)}
           alt={work.title}
           sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw"
           priority={priority}

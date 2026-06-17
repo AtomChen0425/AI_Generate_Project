@@ -10,11 +10,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
 
-  // GitHub Pages 子路径（非常关键）
   basePath: isProd ? `/${repo}` : "",
   assetPrefix: isProd ? `/${repo}/` : "",
 
-  // 避免 GitHub Pages 路由问题
   trailingSlash: true,
 };
 
