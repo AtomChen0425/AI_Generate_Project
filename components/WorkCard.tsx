@@ -8,6 +8,8 @@ type WorkCardProps = {
   onOpen: (work: Work) => void;
   priority?: boolean;
 };
+
+const repo = "AI_Generate_Project";
 const getAssetPath = (path: string) => {
   if (path.startsWith("http")) return path;
 
