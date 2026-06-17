@@ -12,8 +12,18 @@ type PortfolioGalleryProps = {
   showSearch?: boolean;
 };
 
-const tabs = ["All", "Street", "Portrait", "Cinematic", "Landscape"];
+const tabs = ["All", "Street", "Flower", "Cinematic", "Landscape"];
+const repo = "AI_Generate_Project";
+const getAssetPath = (path: string) => {
+  if (path.startsWith("http")) return path;
 
+  const base =
+    process.env.NODE_ENV === "production"
+      ? `/${repo}`
+      : "";
+
+  return `${base}${path}`;
+};
 export function PortfolioGallery({
   eyebrow,
   title,
@@ -115,7 +125,7 @@ export function PortfolioGallery({
             >
               <button type="button" className="work-card__button" onClick={() => setSelectedId(work.id)}>
                 <div className="work-card__media">
-                  <img src={work.image} alt={work.alt} loading="lazy" />
+                  <img src={getAssetPath(work.image)} alt={work.alt} loading="lazy" />
                   <div className="work-card__overlay">
                     <p>{work.location}</p>
                     <span>

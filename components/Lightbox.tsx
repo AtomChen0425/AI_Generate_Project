@@ -10,6 +10,17 @@ type LightboxProps = {
   onClose: () => void;
 };
 
+const repo = "AI_Generate_Project";
+const getAssetPath = (path: string) => {
+  if (path.startsWith("http")) return path;
+
+  const base =
+    process.env.NODE_ENV === "production"
+      ? `/${repo}`
+      : "";
+
+  return `${base}${path}`;
+};
 export function Lightbox({ work, onClose }: LightboxProps) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -95,7 +106,7 @@ export function Lightbox({ work, onClose }: LightboxProps) {
               Close
             </button>
             <div className="lightbox__media">
-              <Image src={work.image} alt={work.title} priority />
+              <Image src={getAssetPath(work.image)} alt={work.title} priority />
             </div>
             <div className="lightbox__copy">
               <h3>{work.title}</h3>
